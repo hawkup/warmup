@@ -1,0 +1,38 @@
+import { useSSG } from 'nextra/ssg'
+import { getTweet } from 'react-tweet/api'
+import { EmbeddedTweet, TweetSkeleton } from 'react-tweet'
+
+export async function getStaticProps() {
+  let tweets = {}
+  const tweetIds = ['1629307668568633344', '1249937011068129280']
+
+  for (const tweetId of tweetIds) {
+    const tweet = await getTweet(tweetId)
+    tweets = {
+      ...tweets,
+      [tweetId]: tweet
+    }
+  }
+
+  return {
+    props: {
+      ssg: {
+        tweets
+      }
+    }
+  }
+}
+
+export const Tweet = ({ id }) => {
+  const { tweets } = useSSG()
+
+  return <EmbeddedTweet tweet={tweets[id]} />
+}
+
+<div className="flex justify-center">
+  <Tweet id="1629307668568633344" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1249937011068129280" />
+</div>
