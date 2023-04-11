@@ -3,4 +3,11 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra()
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  transpilePackages: ['react-tweet']
+}
+
+module.exports = withNextra(nextConfig)
