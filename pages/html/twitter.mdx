@@ -1,0 +1,145 @@
+import { useSSG } from 'nextra/ssg'
+import { getTweet } from 'react-tweet/api'
+import { EmbeddedTweet } from 'react-tweet'
+
+export async function getStaticProps() {
+  return {
+    props: {
+      ssg: {
+        tweets: await getTweets()
+      }
+    }
+  }
+}
+
+export async function getTweets() {
+  let tweets = {}
+  const tweetIds = [
+    '1541037184622403584',
+    '1540680534061264896',
+    '1543700258018000896',
+    '1537432053578289152',
+    '1536117767098834944',
+    '1530286144167944192',
+    '1544682034274226179',
+    '1539639520878120971',
+    '1529437325792628736',
+    '1530978903698771969',
+    '1526893058872197121',
+    '1511180592339042304',
+    '1511223090222710785',
+    '1509696332474191888',
+    '1509054024510701568',
+    '1483673112856219649',
+    '1491474241300037633',
+    '1499408175086419969',
+    '1503056352570220554',
+    '1503428990777790466',
+    '1504098168773906434',
+    '1505528718046900227'
+  ]
+
+  for (const tweetId of tweetIds) {
+    const tweet = await getTweet(tweetId)
+    tweets = {
+      ...tweets,
+      [tweetId]: tweet
+    }
+  }
+
+  return tweets
+}
+
+export const Tweet = ({ id }) => {
+  const { tweets } = useSSG()
+
+  return <EmbeddedTweet tweet={tweets[id]} />
+}
+
+<div className="flex justify-center">
+  <Tweet id="1541037184622403584" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1540680534061264896" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1543700258018000896" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1537432053578289152" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1536117767098834944" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1530286144167944192" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1544682034274226179" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1539639520878120971" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1529437325792628736" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1530978903698771969" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1526893058872197121" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1511180592339042304" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1511223090222710785" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1509696332474191888" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1509054024510701568" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1483673112856219649" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1491474241300037633" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1499408175086419969" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1503056352570220554" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1503428990777790466" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1504098168773906434" />
+</div>
+
+<div className="flex justify-center">
+  <Tweet id="1505528718046900227" />
+</div>

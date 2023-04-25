@@ -3,6 +3,16 @@ import { getTweet } from 'react-tweet/api'
 import { EmbeddedTweet, TweetSkeleton } from 'react-tweet'
 
 export async function getStaticProps() {
+  return {
+    props: {
+      ssg: {
+        tweets: await getTweets()
+      }
+    }
+  }
+}
+
+export async function getTweets() {
   let tweets = {}
   const tweetIds = ['1629307668568633344', '1249937011068129280']
 
@@ -14,13 +24,7 @@ export async function getStaticProps() {
     }
   }
 
-  return {
-    props: {
-      ssg: {
-        tweets
-      }
-    }
-  }
+  return tweets
 }
 
 export const Tweet = ({ id }) => {
